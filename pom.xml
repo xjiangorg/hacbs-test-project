@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>simple-java-project</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.stuartwdouglas.hacbs-test.simple</groupId>
+            <artifactId>simple-jdk17</artifactId>
+            <version>99-does-not-exist</version>
+        </dependency>
+        <!--
+        This is brought in as a shaded dependency by shaded-jdk11
+        <dependency>
+            <groupId>io.github.stuartwdouglas.hacbs-test.simple</groupId>
+            <artifactId>simple-jdk8</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>io.github.stuartwdouglas.hacbs-test.shaded</groupId>
+            <artifactId>shaded-jdk11</artifactId>
+            <version>1.9</version>
+        </dependency>
+        <!-- TODO: replace this with example projects-->
+        <dependency>
+            <groupId>io.github.stuartwdouglas.hacbs-test.gradle</groupId>
+            <artifactId>hacbs-test-simple-gradle-jdk8</artifactId>
+            <version>1.1</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>*</include>
+                                </includes>
+                            </artifactSet>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
