@@ -17,7 +17,7 @@
         <dependency>
             <groupId>io.github.stuartwdouglas.hacbs-test.simple</groupId>
             <artifactId>simple-jdk17</artifactId>
-            <version>99-does-not-exist</version>
+            <version>0.1.2</version>
         </dependency>
         <!--
         This is brought in as a shaded dependency by shaded-jdk11
@@ -42,7 +42,20 @@
 
 
     <build>
+        <finalName>hacbs-test</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>io.github.stuartwdouglas.hacbstest.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
