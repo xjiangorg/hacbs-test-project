@@ -14,3 +14,11 @@ metadata:
 parent:
   id: java-maven
   registryUrl: "https://registry.devfile.io"
+components:
+  - name: image-build
+    image:
+      imageName: hacbs-jvm-build-test-project:latest
+      dockerfile:
+        uri: Dockerfile
+        buildContext: .
+        rootRequired: false

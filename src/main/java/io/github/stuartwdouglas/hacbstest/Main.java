@@ -14,7 +14,7 @@ public class Main {
     public static final String HELLO = "Hello World";
 
     public static void main(String... args) throws IOException {
-        HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", 8080), 100);
+        HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", 8081), 100);
         server.createContext("/").setHandler(new HttpHandler() {
             @Override
             public void handle(HttpExchange exchange) throws IOException {
@@ -24,7 +24,7 @@ public class Main {
                 }
             }
         });
-        System.out.println("Starting HTTP server on port 8080");
+        System.out.println("Starting HTTP server on port 8081");
         server.start();
     }
 
