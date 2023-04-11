@@ -22,3 +22,46 @@ components:
         uri: Dockerfile
         buildContext: .
         rootRequired: false
+  - name: outerloop-deploy
+    kubernetes:
+      inlined: |-
+        kind: Deployment
+        apiVersion: apps/v1
+        metadata:
+          name: hacbs-jvm-build-test-project
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              app: hacbs-jvm-build-test-project
+          template:
+            metadata:
+              labels:
+                app: hacbs-jvm-build-test-project
+            spec:
+              containers:
+                - name: hacbs-jvm-build-test-project
+                  image: hacbs-jvm-build-test-project:latest
+                  ports:
+                    - name: http
+                      containerPort: 8081
+                      protocol: TCP
+                  resources:
+                    limits:
+                      memory: "1024Mi"
+                      cpu: "500m"
+commands:
+  - id: build-image
+    apply:
+      component: image-build
+  - id: deployk8s
+    apply:
+      component: outerloop-deploy
+  - id: deploy
+    composite:
+      commands:
+        - build-image
+        - deployk8s
+      group:
+        kind: deploy
+        isDefault: true

@@ -10,7 +10,7 @@ WORKDIR /work/
 
 COPY --from=builder /work/target/hacbs-test.jar /deployments
 
-EXPOSE 8080
+EXPOSE 8081
 
 ENV AB_JOLOKIA_OFF=""
 ENV JAVA_APP_JAR="/deployments/hacbs-test.jar"
